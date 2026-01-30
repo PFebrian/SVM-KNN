@@ -107,8 +107,9 @@ if df.empty or labse is None:
 # Encode and Prepare Data (Only when needed)
 # =========================
 @st.cache_data
-def prepare_data(df, labse):
+def prepare_data(df):  # Removed 'labse' from parameters
     try:
+        # Use the globally loaded 'labse' here (it's already cached)
         X = labse.encode(df["komentar_bersih"].tolist(), show_progress_bar=False)
         y = df["label"].values
         return X, y
@@ -116,10 +117,20 @@ def prepare_data(df, labse):
         st.error(f"Error encoding data: {e}")
         return None, None
 
-# Call only if needed (e.g., for evaluation)
-X, y = prepare_data(df, labse)
-if X is None:
+# =========================
+# Load Everything (Lazy)
+# =========================
+df = load_data()
+labse = load_labse()
+
+if df.empty or labse is None:
+    st.error("Failed to load data or model. Check your files and dependencies.")
     st.stop()
+
+# Call prepare_data only with df (labse is global)
+X, y = prepare_data(df)  # Removed 'labse' from the call
+if X is None:
+    st.stop() 
 
 # =========================
 # Split FINAL MODEL
@@ -210,3 +221,4 @@ with st.expander("📊 Lihat Evaluasi Model"):
 # =========================
 st.markdown("---")
 st.caption("© 2025 | Deteksi Pelecehan Seksual Verbal • SVM RBF + LaBSE | Peni")
+
