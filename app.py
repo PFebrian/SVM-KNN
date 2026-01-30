@@ -29,9 +29,15 @@ st.set_page_config(
 # Preprocessing
 # =========================
 daftar_abbrev = {
-    "ga": "tidak", "gk": "tidak", "nggak": "tidak",
-    "anj": "anjing", "bgt": "banget", "gw": "aku",
-    "lu": "kamu", "gue": "aku"
+    "jgn": "jangan","bgt": "banget","bngt": "banget","ak": "aku","kl": "kalo","bkn": "bukan","bs" : "bisa",
+    "yg": "yang","tdk": "tidak","gmn": "gimana","emg": "emang","sm": "sama","org": "orang","krn": "karena",
+    "dgn": "dengan","dr": "dari","jg": "juga","izn": "izin","udh": "udah","bgt": "banget","jdi": "jadi",
+    "ap" : "apa","ga": "tidak","g" : "tidak","gk": "tidak","nggak": "tidak","engga": "tidak","aja": "saja",
+    "gue" : "aku", "gw": "aku", "lu": "kamu", "lo": "kamu", "gua" : "aku", "anj":"anjing",
+    "idc": "i dont care","gws": "get well soon","rn": "right now","idk": "i dont know","btw": "by the way",
+    "omg": "oh my god","lmao": "laughing my ass off","lmfao": "laughing my fucking ass off","smh": "shaking my head",
+    "tbh": "to be honest","tbk": "to be kind","thx": "thanks","ty": "thank you","tyvm": "thank you very much",
+    "ikr": "i know, right","asap": "as soon as possible","rlly": "really","plz": "please","wtf": "what the fuck"
 }
 
 def abbrev(text):
@@ -84,6 +90,10 @@ Model: <b>SVM RBF + LaBSE</b>
 # =========================
 df = load_data()
 labse = load_labse()
+
+@st.cache_data
+def encode_corpus(texts):
+    return labse.encode(texts, show_progress_bar=False)
 
 X = labse.encode(df["komentar_bersih"].tolist(), show_progress_bar=False)
 y = df["label"].values
@@ -187,3 +197,4 @@ with st.expander("📊 Lihat Evaluasi Model"):
 # =========================
 st.markdown("---")
 st.caption("© 2025 | Deteksi Pelecehan Seksual Verbal • SVM RBF + LaBSE | Peni")
+
