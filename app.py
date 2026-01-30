@@ -64,8 +64,8 @@ def load_data():
         df["label"] = df["label"].astype(float).astype(int)
         df["komentar_bersih"] = df["komentar"].astype(str).apply(preprocess_text)
         df = df[df["komentar_bersih"].str.strip() != ""]
-        # st.write(f"Dataset loaded: {len(df)} samples")  # Debug: Check size
-        # return df
+        st.write(f"Dataset loaded: {len(df)} samples")  # Debug: Check size
+        return df
     except Exception as e:
         st.error(f"Error loading data: {e}")
         return pd.DataFrame()  # Return empty if fails
@@ -221,5 +221,6 @@ if submit and komentar.strip() != "":
 # =========================
 st.markdown("---")
 st.caption("© 2025 | Deteksi Pelecehan Seksual Verbal • SVM RBF + LaBSE | Peni")
+
 
 
