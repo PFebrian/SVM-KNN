@@ -1,7 +1,8 @@
 streamlit
-scikit-learn==1.3.2
+scikit-learn==1.2.2
 sentence-transformers
 torch
 numpy
 pandas
-joblib
+seaborn
+matplotlib
