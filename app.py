@@ -169,7 +169,7 @@ if svm_final is None:
 st.markdown("### ✍️ Masukkan Komentar")
 
 with st.form("form_prediksi"):
-    komentar = st.text_area("Komentar TikTok", placeholder="contoh: ganteng banget sih dia 😭")
+    komentar = st.text_area("Komentar", placeholder="contoh: ganteng banget sih dia 😭")
     submit = st.form_submit_button("🔍 Prediksi")
 
 # =========================
@@ -221,6 +221,7 @@ if submit and komentar.strip() != "":
 # =========================
 st.markdown("---")
 st.caption("© 2025 | Deteksi Pelecehan Seksual Verbal • SVM RBF + LaBSE | Peni")
+
 
 
 
