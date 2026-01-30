@@ -117,10 +117,20 @@ def prepare_data(df):  # Removed 'labse' from parameters
         st.error(f"Error encoding data: {e}")
         return None, None
 
+# =========================
+# Load Everything (Lazy)
+# =========================
+df = load_data()
+labse = load_labse()
+
+if df.empty or labse is None:
+    st.error("Failed to load data or model. Check your files and dependencies.")
+    st.stop()
+
 # Call prepare_data only with df (labse is global)
 X, y = prepare_data(df)  # Removed 'labse' from the call
 if X is None:
-    st.stop()
+    st.stop() 
 
 # =========================
 # Split FINAL MODEL
@@ -181,7 +191,34 @@ if submit and komentar.strip() != "":
         st.error(f"Error during prediction: {e}")
 
 # =========================
+# Evaluation
+# =========================
+# with st.expander("📊 Lihat Evaluasi Model"):
+#     try:
+#         y_pred = svm_final.predict(X_test_std)
+#         acc = accuracy_score(y_test, y_pred)
+#         prec = precision_score(y_test, y_pred)
+#         rec = recall_score(y_test, y_pred)
+#         f1 = f1_score(y_test, y_pred)
+#         st.markdown(f"- **Akurasi** : `{acc:.2f}`")
+#         st.markdown(f"- **Precision** : `{prec:.2f}`")
+#         st.markdown(f"- **Recall** : `{rec:.2f}`")
+#         st.markdown(f"- **F1-Score** : `{f1:.2f}`")
+#         cm = confusion_matrix(y_test, y_pred)
+#         fig, ax = plt.subplots()
+#         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
+#                     xticklabels=["Non-Pelecehan", "Pelecehan"],
+#                     yticklabels=["Non-Pelecehan", "Pelecehan"], ax=ax)
+#         ax.set_xlabel("Prediksi Model")
+#         ax.set_ylabel("Label Aktual")
+#         ax.set_title("Confusion Matrix SVM RBF")
+#         st.pyplot(fig)
+#     except Exception as e:
+#         st.error(f"Error during evaluation: {e}")
+
+# =========================
 # Footer
 # =========================
 st.markdown("---")
 st.caption("© 2025 | Deteksi Pelecehan Seksual Verbal • SVM RBF + LaBSE | Peni")
+
