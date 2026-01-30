@@ -1,1 +1,0 @@
-joblib.dump(svm_final, "svm_final.pkl")
