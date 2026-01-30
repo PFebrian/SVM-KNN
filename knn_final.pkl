@@ -1,0 +1,1 @@
+joblib.dump(knn_final, "knn_final.pkl")
