@@ -69,9 +69,15 @@ def load_data():
 # =========================
 # Load Model LaBSE
 # =========================
-@st.cache_resource
+# @st.cache_resource
+# def load_labse():
+#     return SentenceTransformer("sentence-transformers/LaBSE")
+@st.cache_resource(show_spinner="Loading LaBSE model...")
 def load_labse():
-    return SentenceTransformer("sentence-transformers/LaBSE")
+    return SentenceTransformer(
+        "sentence-transformers/LaBSE",
+        device="cpu"
+    )
 
 # =========================
 # UI Header
@@ -197,4 +203,5 @@ with st.expander("📊 Lihat Evaluasi Model"):
 # =========================
 st.markdown("---")
 st.caption("© 2025 | Deteksi Pelecehan Seksual Verbal • SVM RBF + LaBSE | Peni")
+
 
