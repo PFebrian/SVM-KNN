@@ -86,7 +86,7 @@ def load_labse():
 # =========================
 st.markdown("""
 <h1 style='text-align:center; font-size:34px;'>
-🚨 Deteksi Pelecehan Seksual Verbal
+Deteksi Pelecehan Seksual Verbal
 </h1>
 <p style='text-align:center;'>
 Model: <b>SVM RBF + LaBSE</b>
@@ -166,7 +166,7 @@ if svm_final is None:
 # =========================
 # Input Form
 # =========================
-st.markdown("### ✍️ Masukkan Komentar")
+st.markdown("### Masukkan Komentar")
 
 with st.form("form_prediksi"):
     komentar = st.text_area("Komentar", placeholder="contoh: ganteng banget sih dia 😭")
@@ -181,7 +181,7 @@ if submit and komentar.strip() != "":
         emb = labse.encode([clean])
         emb_std = scaler.transform(emb)
         pred = svm_final.predict(emb_std)[0]
-        label = "🚨 **Pelecehan**" if pred == 1 else "✅ **Non-Pelecehan**"
+        label = "**Pelecehan**" if pred == 1 else "**Non-Pelecehan**"
         st.subheader("Hasil Prediksi")
         if pred == 1:
             st.error(label)
@@ -221,6 +221,7 @@ if submit and komentar.strip() != "":
 # =========================
 st.markdown("---")
 st.caption("© 2025 | Deteksi Pelecehan Seksual Verbal • SVM RBF + LaBSE | Peni")
+
 
 
 
